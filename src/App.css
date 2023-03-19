@@ -1,4 +1,43 @@
+:root {
+  --bg-container-img: "";
+}
+
+::-webkit-scrollbar {
+  height: 0.5em;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(220, 220, 220, 0.3);
+}
+
+.bg-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--bg-container-img);
+  z-index: -1;
+  filter: brightness(30%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background-image 0.5s ease;
+}
+
 nav {
+  max-width: 1440px;
+  width: 100vw;
+  padding: 0 2%;
   display: flex;
   justify-content: space-between;
 }
@@ -8,22 +47,26 @@ nav ul {
   align-items: center;
   list-style: none;
   padding: 0;
-  flex-basis: 11%;
-  gap: 10%;
+  flex-basis: 14%;
+  gap: 12%;
   flex-flow: wrap row;
   justify-content: space-between;
 }
 
 .movie-base {
-  min-height: 480px;
-  width: 50%;
+  height: 500px;
+  max-height: 500px;
+  width: 1440px;
   display: flex;
   flex-direction: column;
   padding: 2%;
 }
 
+.movie-base-container {
+  width: 50%;
+}
+
 .movie-base h1 {
-  margin: 1rem 0;
   font-weight: 700;
   font-size: 48px;
   text-transform: uppercase;
@@ -59,6 +102,11 @@ nav ul {
   padding: 12px 32px;
 }
 
+.trending-movie-container {
+  width: 1440px;
+  padding: 0 2%;
+}
+
 .movie-card-container {
   max-width: 1440px;
   display: flex;
@@ -72,6 +120,50 @@ nav ul {
   cursor: pointer;
   min-width: 200px;
   min-height: 300px;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 1024px) {
+  nav {
+    padding: 0;
+    justify-content: space-evenly;
+    width: 1024px;
+  }
+
+  nav ul {
+    flex-basis: 18%;
+    gap: 2%;
+    flex-flow: wrap row;
+    justify-content: space-between;
+  }
+
+  .movie-base {
+    width: 1024px;
+    height: 400px;
+    padding: 0 5%;
+  }
+
+  .movie-base h1 {
+    font-size: 32px;
+  }
+
+  .movie-base p {
+    margin: 10px 0;
+    font-size: 14px;
+  }
+
+  .trending-movie-container {
+    width: 100vw;
+    padding: 0 2%;
+  }
+
+  .movie-card-container {
+    margin: 0;
+  }
+
+  .movie-card {
+    min-width: 200px;
+    height: auto;
+  }
 }
