@@ -120,7 +120,8 @@ nav {
   }
 
   .home-container {
-    padding: 50px 50px;
+    height: calc(100vh - 50px);
+    padding: 50px 50px 0 50px;
   }
 
   .home-container h2 {
@@ -212,5 +213,23 @@ nav {
     100% {
       transform: rotate(360deg);
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .home-container {
+    padding: 40px 50px 0 50px;
+  }
+
+  .movie-details {
+    min-height: 280px;
+  }
+
+  .trending-container {
+    margin: 0;
+  }
+
+  .trending-cards-container {
+    gap: 4%;
   }
 }

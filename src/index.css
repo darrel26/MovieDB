@@ -5,3 +5,7 @@
   box-sizing: border-box;
   margin: 0;
 }
+
+html {
+  max-height: 851px;
+}
