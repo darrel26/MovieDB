@@ -30,10 +30,10 @@ export default function NavBar() {
       </a>
       <ul className={isNavClicked ? "nav-option active" : "nav-option"}>
         <li>
-          <a href="#">Movies</a>
+          <a href="/movies">Movies</a>
         </li>
         <li>
-          <a href="#">TV Shows</a>
+          <a href="/tv-shows">TV Shows</a>
         </li>
         <li>
           <a href="#">Search</a>

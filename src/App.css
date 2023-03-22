@@ -37,7 +37,6 @@ nav {
 
 .nav-mobile {
   color: #000;
-  display: none;
 }
 
 .home-container::before {
@@ -67,6 +66,11 @@ nav {
 .home-container p,
 .trending-container h3 {
   color: #fff;
+}
+
+.movie-details p {
+  text-align: justify;
+  line-height: 1.5;
 }
 
 @media (min-width: 375px) {
@@ -120,7 +124,8 @@ nav {
   }
 
   .home-container {
-    padding: 50px 50px;
+    height: calc(100vh - 50px);
+    padding: 50px 50px 0 50px;
   }
 
   .home-container h2 {
@@ -199,10 +204,19 @@ nav {
   }
 
   .loading-spinner {
-    font-size: 32px;
+    font-size: 48px;
     color: #2c3333;
-    opacity: 0.7;
+    opacity: 0.4;
     animation: rotation 2s linear infinite;
+  }
+
+  .home-spinner {
+    width: 100vw;
+    height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #aaafaf;
   }
 
   @keyframes rotation {
@@ -212,5 +226,298 @@ nav {
     100% {
       transform: rotate(360deg);
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .home-container {
+    padding: 40px 50px 0 50px;
+  }
+
+  .movie-details {
+    min-height: 280px;
+  }
+
+  .trending-container {
+    margin: 0;
+  }
+
+  .trending-cards-container {
+    gap: 4%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-option {
+    position: absolute;
+    height: 0;
+    padding: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    top: 0;
+    right: 50px;
+    width: auto;
+  }
+
+  .nav-option li a {
+    padding-left: 50px;
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  .nav-mobile {
+    display: none;
+    color: #000;
+  }
+
+  .movie-details {
+    width: 45%;
+    min-height: 350px;
+  }
+
+  #movie-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 375px) {
+  .details-background-img {
+    min-height: 100vh;
+    background-image: var(--bg-img);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: -2;
+  }
+
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    color: #fff;
+  }
+
+  .details-background-img::before {
+    z-index: -1;
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: #000;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+  }
+
+  .details-container h2 {
+    width: 300px;
+    text-align: center;
+    margin-top: 35px;
+  }
+
+  .details-genres {
+    padding: 0;
+    display: flex;
+    list-style: none;
+    width: 300px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .genre {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: rgba(47, 130, 133, 0.5);
+    margin: 5px 3px;
+    border-radius: 10px;
+    box-shadow: 0 0 16px 0 rgba(31, 38, 135, 0.2);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(5.5px);
+    border-radius: 10px;
+  }
+
+  .user-score-container {
+    width: 150px;
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .details-user-score {
+    position: relative;
+    height: 60px;
+    width: 60px;
+    background: conic-gradient(#0e8388 3.6deg, #aaafaf 0deg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .details-user-score::before {
+    content: "";
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background-color: #2c3333;
+    border-radius: 50%;
+  }
+
+  .user-score-value {
+    position: relative;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .give-rate {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    background: rgba(44, 51, 51, 0.85);
+    box-shadow: 0 5px 5 px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(5.5px);
+    -webkit-backdrop-filter: blur(5.5px);
+    border-radius: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rate-star-icon {
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .details-overview {
+    margin-top: 25px;
+    width: 275px;
+    text-align: justify;
+  }
+
+  .more-container {
+    padding: 25px 0 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .more-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    width: 300px;
+  }
+
+  .more-header h2 {
+    padding-left: 5px;
+  }
+
+  .more-header a {
+    font-weight: 700;
+    color: #0e8388;
+    text-decoration: none;
+  }
+
+  .more-card-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 300px;
+    height: auto;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    gap: 8%;
+  }
+
+  .more-card {
+    margin: 0 5px;
+    min-height: max-content;
+    width: 150px;
+    flex: none;
+    flex-wrap: wrap;
+    border-radius: 10px 10px 8px 8px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    margin-bottom: 10px;
+  }
+
+  .more-name {
+    font-size: 16px;
+    padding: 10px 10px 5px 10px;
+  }
+
+  .more-role {
+    font-size: 14px;
+    padding: 0 10px 15px 10px;
+  }
+
+  .more-profile-img {
+    border-radius: 4px 4px 0 0;
+    width: 100%;
+    height: 175px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .more-card.view-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+  }
+
+  .more-container.cast,
+  .more-container.recommendation {
+    padding-bottom: 0;
+  }
+
+  .more-card.similar {
+    width: 230px;
+  }
+
+  .more-profile-img.recommendation {
+    height: 250px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+
+  .more-profile-img.similar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+
+  .details-user-score.more {
+    height: 40px;
+    width: 40px;
+  }
+
+  .details-user-score.more::before {
+    content: "";
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background-color: #2c3333;
+    border-radius: 50%;
+  }
+
+  .more-name.recommendation {
+    padding-bottom: 10px;
+  }
+
+  .user-score-value.more {
+    font-size: 10px;
+  }
+
+  .more-name.similar {
+    padding-bottom: 12px;
   }
 }
