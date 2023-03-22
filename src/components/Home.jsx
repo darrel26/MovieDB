@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getMoviesTrending, getTvShowsTrending } from "../utils/getQueries";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -15,8 +16,6 @@ export default function Home() {
     ["trending", import.meta.env.VITE_TMDB_KEY],
     urlPath === "/movies" ? getMoviesTrending : getTvShowsTrending
   );
-
-  console.log(reqTrending);
 
   let movies;
 
@@ -37,35 +36,36 @@ export default function Home() {
     );
   };
 
+  if (reqTrending.isLoading) {
+    return (
+      <div className="home-spinner">
+        <FontAwesomeIcon icon={faSpinner} className="loading-spinner" />
+      </div>
+    );
+  }
+
   return (
     <div className="home-container">
       <div className="movie-details">
         {reqTrending.isLoading ? (
-          <FontAwesomeIcon icon={faSpinner} />
+          <FontAwesomeIcon icon={faSpinner} className="loading-spinner" />
         ) : (
           <>
             {urlPath === "/movies" ? (
               movies[active].title.length >= 32 ? (
-                <h2 style={{ fontSize: "24px" }} id="movie-title">
+                <h2 style={{ fontSize: "1.5rem" }} id="movie-title">
                   {movies[active].title}
                 </h2>
               ) : (
                 <h2 id="movie-title">{movies[active].title}</h2>
               )
             ) : movies[active].name.length >= 32 ? (
-              <h2 style={{ fontSize: "24px" }} id="movie-title">
+              <h2 style={{ fontSize: "1.5rem" }} id="movie-title">
                 {movies[active].name}
               </h2>
             ) : (
               <h2 id="movie-title">{movies[active].name}</h2>
             )}
-            {/* {movies[active].name.length >= 32 ? (
-              <h2 style={{ fontSize: "24px" }} id="movie-title">
-                {movies[active].name}
-              </h2>
-            ) : (
-              <h2 id="movie-title">{movies[active].name}</h2>
-            )} */}
             <p>
               {movies[active].overview.length > 258
                 ? movies[active].overview.slice(0, 258).concat([" ..."])
@@ -77,7 +77,12 @@ export default function Home() {
           <a href="#" id="cta-btn">
             Watch Now
           </a>
-          <a href="#">More</a>
+          <Link
+            to={reqTrending.isSuccess && `${urlPath}/${movies[active].id}`}
+            id={reqTrending.isSuccess && movies[active].id}
+          >
+            More
+          </Link>
         </div>
       </div>
       <div className="trending-container">
