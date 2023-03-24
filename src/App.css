@@ -521,3 +521,10 @@ nav {
     padding-bottom: 12px;
   }
 }
+
+@media (min-width: 768px) {
+  .more-header,
+  .more-card-container {
+    width: 668px;
+  }
+}
