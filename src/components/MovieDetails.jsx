@@ -1,6 +1,6 @@
 import React from "react";
 import { useQueries, useQuery } from "react-query";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   getCredits,
   getDetails,
@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavBar from "./NavBar";
 
 export default function MovieDetails() {
+  const navigate = useNavigate();
   const [type, movieId] = useLocation().pathname.split("/").splice(1, 2);
 
   const reqDetails = useQueries([
@@ -73,6 +74,14 @@ export default function MovieDetails() {
   const similar = reqDetails[2].data.results;
   const recommendation = reqDetails[3].data.results;
 
+  const handleMovieCardClicked = (type, id, background) => {
+    navigate(`/${type}/${id}`, { replace: true });
+    document.documentElement.style.setProperty(
+      "--bg-img",
+      `url("https://image.tmdb.org/t/p/original${background}")`
+    );
+  };
+
   return (
     <>
       <NavBar />
@@ -83,7 +92,7 @@ export default function MovieDetails() {
             style={{
               width: "200px",
               height: "300px",
-              backgroundImage: `url("https://image.tmdb.org/t/p/original/${details.poster_path}")`,
+              backgroundImage: `url("https://image.tmdb.org/t/p/original${details.poster_path}")`,
               backgroundSize: "cover",
             }}
           ></div>
@@ -158,9 +167,20 @@ export default function MovieDetails() {
           <div className="more-card-container recommendation">
             {reqDetails[2].isSuccess ? (
               recommendation.slice(0, 6).map((movie) => (
-                <div className="more-card recommendation" key={movie.id}>
+                <div
+                  className="more-card recommendation"
+                  key={movie.id}
+                  onClick={(e) => {
+                    handleMovieCardClicked(
+                      type === "movies" ? "movies" : "tv-shows",
+                      e.target.id,
+                      movie.backdrop_path
+                    );
+                  }}
+                >
                   <div
                     className="more-profile-img recommendation"
+                    id={movie.id}
                     style={{
                       backgroundImage: `url("https://image.tmdb.org/t/p/original${movie.poster_path}")`,
                     }}
@@ -212,8 +232,19 @@ export default function MovieDetails() {
           <div className="more-card-container similar">
             {reqDetails[2].isSuccess ? (
               similar.slice(0, 9).map((movie) => (
-                <div className="more-card similar" key={movie.id}>
+                <div
+                  className="more-card similar"
+                  key={movie.id}
+                  onClick={(e) => {
+                    handleMovieCardClicked(
+                      type === "movies" ? "movies" : "tv-shows",
+                      e.target.id,
+                      movie.backdrop_path
+                    );
+                  }}
+                >
                   <div
+                    id={movie.id}
                     className="more-profile-img similar"
                     style={{
                       backgroundImage: `url("https://image.tmdb.org/t/p/original${movie.backdrop_path}")`,

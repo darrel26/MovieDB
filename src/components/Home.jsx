@@ -24,7 +24,7 @@ export default function Home() {
 
     document.documentElement.style.setProperty(
       "--bg-img",
-      `url("https://image.tmdb.org/t/p/original/${movies[active].backdrop_path}")`
+      `url("https://image.tmdb.org/t/p/original${movies[active].backdrop_path}")`
     );
   }
 
@@ -32,7 +32,7 @@ export default function Home() {
     setActive(e.target.getAttribute("index"));
     document.documentElement.style.setProperty(
       "--bg-img",
-      `url("https://image.tmdb.org/t/p/original/${movies[active].backdrop_path}")`
+      `url("https://image.tmdb.org/t/p/original${movies[active].backdrop_path}")`
     );
   };
 
@@ -104,7 +104,7 @@ export default function Home() {
                 key={movie.id}
                 onClick={handleCardClick}
                 style={{
-                  backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie.poster_path}")`,
+                  backgroundImage: `url("https://image.tmdb.org/t/p/original${movie.poster_path}")`,
                 }}
               ></div>
             ))}
