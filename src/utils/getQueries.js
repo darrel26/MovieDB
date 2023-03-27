@@ -89,3 +89,18 @@ export const getRecommendation = async ({ queryKey }) => {
 
   return res.json();
 };
+
+export const getTopRated = async ({ queryKey }) => {
+  const api_key = queryKey[1];
+  const typeDetails = queryKey[2];
+
+  const res = await fetch(
+    `https://api.themoviedb.org/3/${typeDetails}/top_rated?api_key=${api_key}&language=en-US`
+  );
+
+  if (!res.ok) {
+    throw new Error("api_key is not ok");
+  }
+
+  return res.json();
+};
